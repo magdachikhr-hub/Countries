@@ -1,29 +1,11 @@
-import { supabase } from "../components/lib/supabaseClient";
-import { useState, useEffect } from "react";
-import type { Country } from "../types/country";
 import CountryCard from "../components/country/CountryCard";
+import UseCountries from "../hooks/useCountries";
 
 function HomePage() {
-  const [countries, setCountries] = useState<Country[]>([]);
-
-  useEffect(() => {
-    async function getCountries() {
-      try {
-        const { data, error } = await supabase.from("countries").select("*");
-
-        if (!data) return;
-        if (error) {
-          throw error;
-        }
-        setCountries(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getCountries();
-  }, []);
+  const { countries, error, loading } = UseCountries();
+  console.log(error);
   console.log(countries);
-
+  console.log(loading);
   return (
     <>
       {countries.map((country) => (
