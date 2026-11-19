@@ -3,7 +3,7 @@ export interface Country {
   alpha_2: string;
   alpha_3: string;
   name: string;
-  offical_name: string;
+  official_name: string;
   capital: string;
   flag_url: string;
   region: string;
