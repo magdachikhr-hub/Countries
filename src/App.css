@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+#country_skeleton {
+  animation: fade_in_out 1300ms infinite;
+}
+
+@keyframes fade_in_out {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
