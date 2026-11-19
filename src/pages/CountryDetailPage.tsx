@@ -1,5 +1,10 @@
 function CountryDetailPage() {
-  return <div>CountryDetailPage</div>;
+  return <>
+  
+  
+  
+  
+  </>;
 }
 
 export default CountryDetailPage;
