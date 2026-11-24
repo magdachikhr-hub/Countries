@@ -1,6 +1,7 @@
-import AdminMainPage from "./pages/AdminMainPage";
-import AdminCountryPage from "./pages/AdminCountryPage";
-import AdminUsersPage from "./pages/AdminUsersPage";
+import AdminMain from "./components/admin/AdminMain";
+import AdminAddCountries from "./components/admin/AdminAddCountries";
+import AdminCountries from "./components/admin/AdminCountries";
+import AdminUsers from "./components/admin/AdminUsers";
 import CountryDetailPage from "./pages/CountryDetailPage";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -22,17 +23,18 @@ function App() {
         ></Route>
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
         <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
+        <Route path="/admin-panel" element={<AdminMain></AdminMain>}></Route>
         <Route
-          path="/admin-panel"
-          element={<AdminMainPage></AdminMainPage>}
-        ></Route>
-        <Route
-          path="/admin-panel/country"
-          element={<AdminCountryPage></AdminCountryPage>}
+          path="/admin-panel/countries"
+          element={<AdminCountries></AdminCountries>}
         ></Route>
         <Route
           path="/admin-panel/users"
-          element={<AdminUsersPage></AdminUsersPage>}
+          element={<AdminUsers></AdminUsers>}
+        ></Route>
+        <Route
+          path="/admin-panel/add-country"
+          element={<AdminAddCountries></AdminAddCountries>}
         ></Route>
       </Routes>
     </>
