@@ -4,10 +4,10 @@ import DeleteModal from "../common/DeleteModal";
 import { useState } from "react";
 function AdminCountries() {
   const { countries, error, loading } = UseCountries();
-  const [onDelete, setOndelete] = useState(false);
+  const [onDelete, setOnDelete] = useState<boolean>(false);
 
   //   const handleOnDelete = () => {
-  //     setOndelete(true);
+  //     setOnDelete(true);
   //     console.log(onDelete);
   //   };
 
@@ -23,7 +23,7 @@ function AdminCountries() {
             <div>
               <CountryCard>{country}</CountryCard>
               <button
-                onClick={() => setOndelete(true)}
+                onClick={() => setOnDelete(true)}
                 className="bg-red-500 rounded cursor-pointer px-2"
               >
                 delete
@@ -32,7 +32,7 @@ function AdminCountries() {
           </>
         ))}
       </div>
-      {onDelete && <DeleteModal></DeleteModal>}
+      {onDelete && <DeleteModal open={{ onDelete, setOnDelete }}></DeleteModal>}
     </>
   );
 }
