@@ -21,7 +21,7 @@ function DeleteModal({
     <>
       <div
         onClick={() => setOnDelete(!onDelete)}
-        className="absolute flex justify-center items-center top-0 w-full h-screen bg-[#00000046] backdrop-blur-xs"
+        className="fixed flex justify-center items-center bottom-0 w-full h-screen bg-[#00000046] backdrop-blur-xs"
       >
         <div
           onClick={(e) => e.stopPropagation()}

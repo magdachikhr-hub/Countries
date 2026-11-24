@@ -1,5 +1,18 @@
 function AdminAddCountries() {
-  return <div>AdminAddCountries</div>;
+  return <>
+  
+  
+  <form >
+
+
+
+
+
+
+  </form>
+  
+  
+  </>
 }
 
 export default AdminAddCountries;
