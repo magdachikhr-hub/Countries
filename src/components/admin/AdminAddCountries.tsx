@@ -193,12 +193,23 @@ function AdminAddCountries() {
                   setPreview(url);
                 }}
               />
+              <button className="bg-yellow-300 mb-3 rounded px-5 py-2 cursor-pointer hover:bg-yellow-600 hover:text-white">
+                Clear
+              </button>
               <div className="w-95 h-45">
-                <img
-                  src={preview ?? undefined}
-                  className="w-full h-full"
-                  alt=""
-                />
+                {preview ? (
+                  <img
+                    src={preview ?? undefined}
+                    className="w-full h-full"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src="/placeholder.jpg"
+                    className="w-full h-full object-cover"
+                    alt=""
+                  />
+                )}
               </div>
             </div>
             <div className="h-3">
