@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { countrySchema, REGIONS } from "../../schema/countrySchema";
 import { supabase } from "../lib/supabaseClient";
+import { useState } from "react";
 
 function AdminAddCountries() {
+  const [preview, setPreview] = useState<null | string>(null);
+
   const {
     register,
     handleSubmit,
@@ -170,21 +173,37 @@ function AdminAddCountries() {
           </div>
           <div>
             <label
-              htmlFor="flag_url"
+              htmlFor="flag"
               className="bg-blue-300 rounded px-5 py-2 cursor-pointer hover:bg-blue-600 hover:text-white"
             >
               upload flag
             </label>
-            <input
-              type="file"
-              id="flag_url"
-              className="hidden"
-              {...register("flag_url")}
-            />
-            <img src="/image" alt="" />
+            <div className="mt-6">
+              <input
+                type="file"
+                id="flag"
+                className="hidden"
+                // multiple
+                {...register("flag")}
+                onChange={(e) => {
+                  const file = e.target.files![0];
+                  console.log(file);
+                  const url = URL.createObjectURL(file);
+                  console.log(url);
+                  setPreview(url);
+                }}
+              />
+              <div className="w-95 h-45">
+                <img
+                  src={preview ?? undefined}
+                  className="w-full h-full"
+                  alt=""
+                />
+              </div>
+            </div>
             <div className="h-3">
-              {errors.flag_url && (
-                <p className="text-red-500">{errors.flag_url.message}</p>
+              {errors.flag && (
+                <p className="text-red-500">{errors.flag.message}</p>
               )}
             </div>
           </div>
