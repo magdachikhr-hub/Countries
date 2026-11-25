@@ -2,9 +2,8 @@ import { type CountryFormValues } from "../../schema/countrySchema";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { countrySchema, REGIONS } from "../../schema/countrySchema";
-import { supabase } from "../lib/supabaseClient";
 import { useState } from "react";
-
+import { uploadFlag } from "../../services/createCountry";
 function AdminAddCountries() {
   const [preview, setPreview] = useState<null | string>(null);
 
@@ -14,7 +13,12 @@ function AdminAddCountries() {
     formState: { errors },
   } = useForm<CountryFormValues>({ resolver: yupResolver(countrySchema) });
 
-  function onSubmit() {}
+  const oneFile = register("flag");
+
+  async function onSubmit(values: CountryFormValues) {
+    console.log(values.flag);
+    await uploadFlag(values.alpha_2, values.flag[0]);
+  }
 
   return (
     <>
@@ -183,17 +187,23 @@ function AdminAddCountries() {
                 type="file"
                 id="flag"
                 className="hidden"
+                accept="image/webp"
                 // multiple
-                {...register("flag")}
+                {...oneFile}
                 onChange={(e) => {
+                  oneFile.onChange(e);
                   const file = e.target.files![0];
                   console.log(file);
                   const url = URL.createObjectURL(file);
                   console.log(url);
-                  setPreview(url);
+                  setPreview(file ? url : null);
+                  if (preview) URL.revokeObjectURL(preview);
                 }}
               />
-              <button className="bg-yellow-300 mb-3 rounded px-5 py-2 cursor-pointer hover:bg-yellow-600 hover:text-white">
+              <button
+                onClick={() => setPreview(null)}
+                className="bg-yellow-300 mb-3 rounded px-5 py-2 cursor-pointer hover:bg-yellow-600 hover:text-white"
+              >
                 Clear
               </button>
               <div className="w-95 h-45">

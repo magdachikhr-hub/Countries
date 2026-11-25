@@ -50,7 +50,7 @@ export const countrySchema = yup.object({
     .integer("must be integer")
     .min(0, "must be a positive number"),
 
-  flag: yup.mixed<File>().required("required"),
+  flag: yup.mixed<FileList>().required("required"),
 });
 
 export type CountryFormValues = yup.InferType<typeof countrySchema>;
