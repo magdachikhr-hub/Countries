@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { countrySchema, REGIONS } from "../../schema/countrySchema";
 import { useState } from "react";
 import { uploadFlag } from "../../services/createCountry";
+import { createCountry } from "../../services/createCountry";
+
 function AdminAddCountries() {
   const [preview, setPreview] = useState<null | string>(null);
 
@@ -17,7 +19,22 @@ function AdminAddCountries() {
 
   async function onSubmit(values: CountryFormValues) {
     console.log(values.flag);
-    await uploadFlag(values.alpha_2, values.flag[0]);
+    try {
+      const url = await uploadFlag(values.alpha_2, values.flag[0]);
+      await createCountry({
+        name: values.name,
+        official_name: values.official_name,
+        alpha_2: values.alpha_2,
+        alpha_3: values.alpha_3,
+        capital: values.capital,
+        region: values.region,
+        subregion: values.subregion,
+        population: values.population,
+        flag_url: url,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

@@ -29,7 +29,25 @@ export async function uploadFlag(alpha_2: string, flag: File) {
 
   if (error) {
     console.log(error.message);
+    throw error;
   }
 
+  const { data: urlData } = supabase.storage
+    .from("flags")
+    .getPublicUrl(data.path);
+  console.log(urlData.publicUrl);
+  return urlData.publicUrl;
+}
+
+export async function createCountry(values: NewCountry) {
+  const { data, error } = await supabase
+    .from("countries")
+    .insert(values)
+    .select();
+
+  if (error) {
+    console.log(error.code, error.message);
+    throw error;
+  }
   console.log(data);
 }
