@@ -15,83 +15,188 @@ function AdminAddCountries() {
 
   return (
     <>
-      <form onSubmit={() => onSubmit}>
-        <div>
-          <label htmlFor="name">name</label>
-          <input
-            type="text"
-            className="border"
-            id="name"
-            {...register("name")}
-          />
-        </div>
-        <div>
-          <label htmlFor="official_name">official_name</label>
-          <input
-            type="text"
-            className="border"
-            id="official_name"
-            {...register("official_name")}
-          />
-        </div>
-        <div>
-          <label htmlFor="alpha_2">alpha 2:</label>
-          <input
-            type="text"
-            className="border"
-            id="alpha_2"
-            {...register("alpha_2")}
-          />
-        </div>
-        <div>
-          <label htmlFor="alpha_3">alpha 3:</label>
-          <input
-            type="text"
-            className="border"
-            id="alpha_3"
-            {...register("alpha_3")}
-          />
-        </div>
-        <div>
-          <label htmlFor="capital">capital city</label>
-          <input
-            type="text"
-            className="border"
-            id="capital"
-            {...register("capital")}
-          />
-        </div>
-        <div>
-          <select {...register("region")} defaultValue="">
-            <option value="" disabled>
-              Region:
-            </option>
-            {REGIONS.map((region) => (
-              <option key={region} value={region}>
-                {region}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-8 w-[60%] min-w-82.5 max-w-162.5 m-auto">
+          <div>
+            <label htmlFor="name" className="font-bold text-sm text-[#666666]">
+              name
+            </label>
+            <input
+              type="text"
+              className="border border-[#CCC] w-full h-12"
+              id="name"
+              {...register("name")}
+            />
+            <div className="h-3">
+              {errors.name && (
+                <p className="text-red-500">{errors.name.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="official_name"
+              className="font-bold text-sm text-[#666666] "
+            >
+              official_name
+            </label>
+            <input
+              type="text"
+              className="border border-[#CCC] w-full h-12"
+              id="official_name"
+              {...register("official_name")}
+            />
+            <div className="h-3">
+              {errors.official_name && (
+                <p className="text-red-500">{errors.official_name.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="alpha_2"
+              className="font-bold text-sm text-[#666666]"
+            >
+              alpha 2:
+            </label>
+            <input
+              type="text"
+              className="border border-[#CCC] w-full h-12"
+              id="alpha_2"
+              {...register("alpha_2")}
+            />
+            <div className="h-3">
+              {errors.alpha_2 && (
+                <p className="text-red-500">{errors.alpha_2.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="alpha_3"
+              className="font-bold text-sm text-[#666666]"
+            >
+              alpha 3:
+            </label>
+            <input
+              type="text"
+              className="border border-[#CCC] w-full h-12"
+              id="alpha_3"
+              {...register("alpha_3")}
+            />
+            <div className="h-3">
+              {errors.alpha_3 && (
+                <p className="text-red-500">{errors.alpha_3.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="capital"
+              className="font-bold text-sm text-[#666666]"
+            >
+              capital city
+            </label>
+            <input
+              type="text"
+              className="border border-[#CCC] w-full h-12"
+              id="capital"
+              {...register("capital")}
+            />
+            <div className="h-3">
+              {errors.capital && (
+                <p className="text-red-500">{errors.capital.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <select
+              {...register("region")}
+              defaultValue=""
+              className="font-bold text-md text-[#666666] border border-[#CCC] w-25 h-12"
+            >
+              <option value="" disabled>
+                Region:
               </option>
-            ))}
-          </select>
+              {REGIONS.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
+            <div className="h-3">
+              {errors.region && (
+                <p className="text-red-500">{errors.region.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="sub-region"
+              className="font-bold text-sm text-[#666666]"
+            >
+              sub-region:
+            </label>
+            <input
+              type="text"
+              className="border border-[#CCC] w-full h-12"
+              id="sub-region"
+              {...register("subregion")}
+            />
+            <div className="h-3">
+              {errors.subregion && (
+                <p className="text-red-500">{errors.subregion.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="population"
+              className="font-bold text-sm text-[#666666]"
+            >
+              population:
+            </label>
+            <input
+              type="number"
+              className="border border-[#CCC] w-full h-12"
+              id="population"
+              {...register("population")}
+            />
+            <div className="h-3">
+              {errors.population && (
+                <p className="text-red-500">{errors.population.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="flag_url"
+              className="bg-blue-300 rounded px-5 py-2 cursor-pointer hover:bg-blue-600 hover:text-white"
+            >
+              upload flag
+            </label>
+            <input
+              type="file"
+              id="flag_url"
+              className="hidden"
+              {...register("flag_url")}
+            />
+            <img src="/image" alt="" />
+            <div className="h-3">
+              {errors.flag_url && (
+                <p className="text-red-500">{errors.flag_url.message}</p>
+              )}
+            </div>
+          </div>
+          <div>
+            <button
+              className="w-35 h-15 bg-green-600 rounded-2xl text-white font-bold hover:bg-green-950"
+              type="submit"
+            >
+              upload country
+            </button>
+          </div>
         </div>
-        <div>
-          <label htmlFor="sub-region">sub-region:</label>
-          <input
-            type="text"
-            className="border"
-            id="sub-region"
-            {...register("subregion")}
-          />
-        </div>
-        <div>
-          <label htmlFor="population">population:</label>
-          <input
-            type="number"
-            className="border"
-            id="population"
-            {...register("population")}
-          />
-        </div>
-        <input type="file" name="" id="" />
       </form>
     </>
   );
