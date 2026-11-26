@@ -1,5 +1,5 @@
 import type { Country } from "../../types/country";
-import getNativeName from "../../utils/getNativeName";
+// import getNativeName from "../../utils/getNativeName";
 import formatPopulation from "../../utils/formatPopulation.ts";
 function CountryDetailedInfo({ countryInfo }: { countryInfo: Country }) {
   console.log(countryInfo);

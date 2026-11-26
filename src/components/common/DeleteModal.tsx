@@ -1,12 +1,18 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import type { Country } from "../../types/country";
+import { deleteCountry } from "../../services/deleteCountry";
 
 function DeleteModal({
   open,
 }: {
-  open: { onDelete: boolean; setOnDelete: (arg0: boolean) => void };
+  open: {
+    onDelete: boolean;
+    setOnDelete: (arg0: boolean) => void;
+    countryToDelete: Country;
+  };
 }) {
-  const { onDelete, setOnDelete } = open;
+  const { onDelete, setOnDelete, countryToDelete } = open;
   console.log(onDelete);
 
   useEffect(() => {
@@ -32,11 +38,18 @@ function DeleteModal({
             undone.
           </p>
           <div className="flex justify-center gap-5">
-            <button className="bg-red-500 rounded cursor-pointer px-2 w-20">
+            <button
+              onClick={() =>
+                deleteCountry(countryToDelete.id, countryToDelete, setOnDelete)
+              }
+              className="bg-red-500 rounded cursor-pointer px-2 w-20"
+            >
               Delete
             </button>
             <button
-              onClick={() => setOnDelete(!onDelete)}
+              onClick={() => {
+                setOnDelete(!onDelete);
+              }}
               className="w-20 bg-gray-400 rounded cursor-pointer px-2"
             >
               Go Back
