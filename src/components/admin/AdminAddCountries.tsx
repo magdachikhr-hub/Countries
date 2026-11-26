@@ -12,6 +12,7 @@ function AdminAddCountries() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CountryFormValues>({ resolver: yupResolver(countrySchema) });
 
@@ -32,6 +33,8 @@ function AdminAddCountries() {
         population: values.population,
         flag_url: url,
       });
+      reset();
+      setPreview(null);
     } catch (error) {
       console.log(error);
     }
